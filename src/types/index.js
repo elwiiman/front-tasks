@@ -4,3 +4,5 @@ export const ADD_PROJECT = "ADD_PROJECTS";
 export const ERROR_PROJECT_FORM = "ERROR_PROJECT_FORM";
 export const FOCUS_PROJECT = "FOCUS_PROJECT";
 export const DELETE_PROJECT = "DELETE_PROEJCT";
+
+export const OBTAIN_TASKS = "OBTAIN_TASKS";
