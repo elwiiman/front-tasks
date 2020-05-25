@@ -1,7 +1,17 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import Task from "./Task";
+import projectContext from "../../context/projects/projectContext";
 
 const ListTasks = () => {
+  const projectsContext = useContext(projectContext);
+
+  const { projectFocus, deleteProject } = projectsContext;
+
+  if (!projectFocus) return <h1>Please select a project</h1>;
+
+  //array destructruring
+  const [projectSelected] = projectFocus;
+
   const tasksInAProject = [
     { name: "Elegir plataforma", state: true },
     { name: "Elegir colores", state: false },
@@ -11,7 +21,7 @@ const ListTasks = () => {
 
   return (
     <Fragment>
-      <h2>Project: Tienda Virtual</h2>
+      <h2>{projectSelected.name}</h2>
       <ul className="listado-tareas">
         {tasksInAProject.length === 0 ? (
           <li className="tarea">
@@ -22,7 +32,11 @@ const ListTasks = () => {
         )}
       </ul>
 
-      <button type="button" className="btn btn-eliminar">
+      <button
+        type="button"
+        className="btn btn-eliminar"
+        onClick={() => deleteProject(projectSelected.id)}
+      >
         Delete Project &times;
       </button>
     </Fragment>
