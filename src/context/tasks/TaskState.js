@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import taskContext from "./taskContext";
 import taskReducer from "./taskReducer";
 
-import { OBTAIN_TASKS } from "../../types";
+import { OBTAIN_TASKS, ADD_TASK, ERROR_TASK_FORM } from "../../types";
 
 const TaskState = (props) => {
   const initialState = {
@@ -19,6 +19,7 @@ const TaskState = (props) => {
       { name: "Elegir plataforma de pago", state: false, projectId: 3 },
     ],
     tasksInProject: null,
+    errorInForm: false,
   };
 
   const [state, dispatch] = useReducer(taskReducer, initialState);
@@ -28,12 +29,25 @@ const TaskState = (props) => {
     dispatch({ type: OBTAIN_TASKS, payload: projectId });
   };
 
+  // function to add a task to an specific project
+  const addTask = (task) => {
+    dispatch({ type: ADD_TASK, payload: task });
+  };
+
+  //function for validate new project form
+  const showError = () => {
+    dispatch({ type: ERROR_TASK_FORM });
+  };
+
   return (
     <taskContext.Provider
       value={{
         tasks: state.tasks,
         tasksInProject: state.tasksInProject,
+        errorInForm: state.errorInForm,
         obtainTasks,
+        addTask,
+        showError,
       }}
     >
       {props.children}
