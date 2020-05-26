@@ -3,6 +3,7 @@ import {
   ADD_TASK,
   ERROR_TASK_FORM,
   DELETE_TASK,
+  CHANGE_TASK_STATUS,
 } from "../../types";
 
 export default (state, action) => {
@@ -29,6 +30,18 @@ export default (state, action) => {
       return {
         ...state,
         tasks: state.tasks.filter((task) => task.id !== action.payload),
+      };
+
+    case CHANGE_TASK_STATUS:
+      return {
+        ...state,
+        tasksInProject: state.tasksInProject.map((task) => {
+          if (task.id === action.payload.id) {
+            return action.payload;
+          } else {
+            return task;
+          }
+        }),
       };
 
     default:

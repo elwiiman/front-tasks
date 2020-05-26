@@ -7,6 +7,7 @@ import {
   ADD_TASK,
   ERROR_TASK_FORM,
   DELETE_TASK,
+  CHANGE_TASK_STATUS,
 } from "../../types";
 
 const TaskState = (props) => {
@@ -49,6 +50,11 @@ const TaskState = (props) => {
     dispatch({ type: DELETE_TASK, payload: id });
   };
 
+  // function to  change status in a tasl
+  const changeStatus = (task) => {
+    dispatch({ type: CHANGE_TASK_STATUS, payload: task });
+  };
+
   return (
     <taskContext.Provider
       value={{
@@ -59,6 +65,7 @@ const TaskState = (props) => {
         addTask,
         showError,
         deleteTask,
+        changeStatus,
       }}
     >
       {props.children}
