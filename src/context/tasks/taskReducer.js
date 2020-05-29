@@ -4,6 +4,8 @@ import {
   ERROR_TASK_FORM,
   DELETE_TASK,
   CHANGE_TASK_STATUS,
+  SELECT_CURRENT_TASK,
+  UPDATE_TASK,
 } from "../../types";
 
 export default (state, action) => {
@@ -39,6 +41,23 @@ export default (state, action) => {
           if (task.id === action.payload.id) {
             return action.payload;
           } else {
+            return task;
+          }
+        }),
+      };
+
+    case SELECT_CURRENT_TASK:
+      return { ...state, taskSelected: action.payload };
+
+    case UPDATE_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.map((task) => {
+          if (task.id === action.payload.id) {
+            console.log(action.payload);
+            return action.payload;
+          } else {
+            console.log(task);
             return task;
           }
         }),

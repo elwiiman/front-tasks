@@ -10,3 +10,5 @@ export const ADD_TASK = "ADD_TASK";
 export const ERROR_TASK_FORM = "ERROR_TASK_FORM";
 export const DELETE_TASK = "DELETE_TASK";
 export const CHANGE_TASK_STATUS = "CHANGE_TASK_STATUS";
+export const SELECT_CURRENT_TASK = "SELECT_CURRENT_TASK";
+export const UPDATE_TASK = "UPDATE_TASK";

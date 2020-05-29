@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import projectContext from "../../context/projects/projectContext";
 import taskContext from "../../context/tasks/taskContext";
 
@@ -7,7 +7,23 @@ const FormTask = () => {
   const { projectFocus } = projectsContext;
 
   const tasksContext = useContext(taskContext);
-  const { addTask, errorInForm, showError, obtainTasks } = tasksContext;
+  const {
+    taskSelected,
+    addTask,
+    errorInForm,
+    showError,
+    obtainTasks,
+    updateTask,
+  } = tasksContext;
+
+  //Effect to detect if a task has been selected, in order to edit
+  useEffect(() => {
+    if (taskSelected !== null) {
+      setTask(taskSelected);
+    } else {
+      setTask({ name: "" });
+    }
+  }, [taskSelected]);
 
   //State fo THIS component
   const [task, setTask] = useState({
@@ -37,10 +53,15 @@ const FormTask = () => {
       return;
     }
 
-    //add new task to tasks state
-    task.projectId = projectSelected.id;
-    task.state = false;
-    addTask(task);
+    //Review if is editing or adding
+    if (taskSelected === null) {
+      //add new task to tasks state
+      task.projectId = projectSelected.id;
+      task.state = false;
+      addTask(task);
+    } else {
+      updateTask(task);
+    }
 
     //obtain tasks in the selected project
     obtainTasks(projectSelected.id);
@@ -66,7 +87,7 @@ const FormTask = () => {
           <input
             type="submit"
             className="btn btn-primario btn-block btn-submit"
-            value="Add task"
+            value={taskSelected !== null ? "Edit task" : "Add task"}
           />
         </div>
       </form>

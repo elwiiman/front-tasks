@@ -8,6 +8,8 @@ import {
   ERROR_TASK_FORM,
   DELETE_TASK,
   CHANGE_TASK_STATUS,
+  SELECT_CURRENT_TASK,
+  UPDATE_TASK,
 } from "../../types";
 
 const TaskState = (props) => {
@@ -26,6 +28,7 @@ const TaskState = (props) => {
     ],
     tasksInProject: null,
     errorInForm: false,
+    taskSelected: null,
   };
 
   const [state, dispatch] = useReducer(taskReducer, initialState);
@@ -55,17 +58,29 @@ const TaskState = (props) => {
     dispatch({ type: CHANGE_TASK_STATUS, payload: task });
   };
 
+  //function to extract a task for edit
+  const extractTask = (task) => {
+    dispatch({ type: SELECT_CURRENT_TASK, payload: task });
+  };
+
+  //function to edit and update task
+  const updateTask = (task) => {
+    dispatch({ type: UPDATE_TASK, payload: task });
+  };
   return (
     <taskContext.Provider
       value={{
         tasks: state.tasks,
         tasksInProject: state.tasksInProject,
         errorInForm: state.errorInForm,
+        taskSelected: state.taskSelected,
         obtainTasks,
         addTask,
         showError,
         deleteTask,
         changeStatus,
+        extractTask,
+        updateTask,
       }}
     >
       {props.children}

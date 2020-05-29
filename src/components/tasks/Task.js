@@ -7,7 +7,7 @@ const Task = ({ task }) => {
   const { projectFocus } = projectsContext;
 
   const tasksContext = useContext(taskContext);
-  const { deleteTask, obtainTasks, changeStatus } = tasksContext;
+  const { deleteTask, obtainTasks, changeStatus, extractTask } = tasksContext;
 
   const [projectSelected] = projectFocus;
 
@@ -21,6 +21,11 @@ const Task = ({ task }) => {
   const changeState = (task) => {
     task.state = !task.state;
     changeStatus(task);
+  };
+
+  //function to selct a task
+  const selectTask = (task) => {
+    extractTask(task);
   };
 
   return (
@@ -46,7 +51,11 @@ const Task = ({ task }) => {
         )}
       </div>
       <div className="acciones">
-        <button type="button" className="btn btn-primario">
+        <button
+          type="button"
+          className="btn btn-primario"
+          onClick={() => selectTask(task)}
+        >
           Edit
         </button>
         <button
