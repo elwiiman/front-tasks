@@ -52,6 +52,7 @@ export default (state, action) => {
     case UPDATE_TASK:
       return {
         ...state,
+        taskSelected: null,
         tasks: state.tasks.map((task) => {
           if (task.id === action.payload.id) {
             console.log(action.payload);

@@ -12,6 +12,7 @@ const ListProjects = () => {
   // use effect function
   useEffect(() => {
     obtainProjects();
+    // eslint-disable-next-line
   }, []);
 
   //check if projects has content
