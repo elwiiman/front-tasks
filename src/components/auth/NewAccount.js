@@ -2,11 +2,15 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import alertContext from "../../context/alerts/alertContext";
+import authContext from "../../context/authentication/authContext";
 
 const NewAccount = () => {
   // extraction context
   const alertsContext = useContext(alertContext);
   const { alert, showAlert } = alertsContext;
+
+  const authsContext = useContext(authContext);
+  const { signInUser } = authsContext;
 
   //state for login
   const [user, setUser] = useState({
@@ -53,6 +57,7 @@ const NewAccount = () => {
     }
 
     //pass to action
+    signInUser({ name, email, password });
   };
 
   return (
