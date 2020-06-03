@@ -1,16 +1,27 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import alertContext from "../../context/alerts/alertContext";
 import authContext from "../../context/authentication/authContext";
 
-const NewAccount = () => {
+const NewAccount = (props) => {
   // extraction context
   const alertsContext = useContext(alertContext);
   const { alert, showAlert } = alertsContext;
 
   const authsContext = useContext(authContext);
-  const { signInUser } = authsContext;
+  const { message, authenticated, signInUser } = authsContext;
+
+  //in case user is registered or authenticated or a duplicate register
+  useEffect(() => {
+    if (authenticated) {
+      props.history.push("/projects");
+    }
+
+    if (message) {
+      showAlert(message.msg, message.category);
+    }
+  }, [message, authenticated, props.history]);
 
   //state for login
   const [user, setUser] = useState({
