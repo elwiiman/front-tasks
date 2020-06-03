@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
+import alertContext from "../../context/alerts/alertContext";
+
 const NewAccount = () => {
+  // extraction context
+  const alertsContext = useContext(alertContext);
+  const { alert, showAlert } = alertsContext;
+
   //state for login
   const [user, setUser] = useState({
     email: "",
@@ -23,16 +29,37 @@ const NewAccount = () => {
     e.preventDefault();
     //validate not empty fields
 
+    if (
+      name.trim() === "" ||
+      email.trim() === "" ||
+      password.trim() === "" ||
+      confirmPassword.trim() === ""
+    ) {
+      showAlert("All fields are mandatory", "alerta-error");
+      return;
+    }
+
     //password minimum of 6 characters
+    if (password.length < 6) {
+      showAlert("Password must be at least of 6 characters", "alerta-error");
+      return;
+    }
     //https://www.the-art-of-web.com/javascript/validate-password/
 
     //check both passwords are the same.
+    if (password !== confirmPassword) {
+      showAlert("Passwords are not the same", "alerta-error");
+      return;
+    }
 
     //pass to action
   };
 
   return (
     <div className="form-usuario">
+      {alert ? (
+        <div className={`alerta ${alert.category}`}>{alert.msg}</div>
+      ) : null}
       <div className="contenedor-form sombra-dark">
         <h1>Sign in</h1>
         <form onSubmit={onSubmit}>
