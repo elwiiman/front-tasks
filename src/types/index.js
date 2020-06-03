@@ -15,3 +15,10 @@ export const UPDATE_TASK = "UPDATE_TASK";
 
 export const SHOW_ALERT = "SHOW ALERT";
 export const HIDE_ALERT = "HIDE ALERT";
+
+export const SUCCESS_REGISTER = "SUCCESS_REGISTER";
+export const ALERT_REGISTER = "ALERT_REGISTER";
+export const OBTAIN_USER = "OBTAIN_USER";
+export const SUCCES_LOGIN = "SUCCES_LOGIN";
+export const ALERT_LOGIN = "ALERT_LOGIN";
+export const SIGN_OUT = "SIGN_OUT";
