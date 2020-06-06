@@ -21,4 +21,4 @@ export const ALERT_REGISTER = "ALERT_REGISTER";
 export const OBTAIN_USER = "OBTAIN_USER";
 export const SUCCES_LOGIN = "SUCCES_LOGIN";
 export const ALERT_LOGIN = "ALERT_LOGIN";
-export const SIGN_OUT = "SIGN_OUT";
+export const LOGOUT = "LOGOUT";

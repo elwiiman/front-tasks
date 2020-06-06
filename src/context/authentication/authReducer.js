@@ -4,17 +4,36 @@ import {
   OBTAIN_USER,
   SUCCES_LOGIN,
   ALERT_LOGIN,
-  SIGN_OUT,
+  LOGOUT,
 } from "../../types";
 
 export default (state, action) => {
   switch (action.type) {
+    case SUCCES_LOGIN:
     case SUCCESS_REGISTER:
       localStorage.setItem("token", action.payload.token);
-      return { ...state, authenticated: true, message: null };
+      return { ...state, authenticated: true, message: null, loading: false };
 
+    case LOGOUT:
+    case ALERT_LOGIN:
     case ALERT_REGISTER:
-      return { ...state, token: null, message: action.payload };
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: null,
+        message: action.payload,
+        authenticated: null,
+        loading: false,
+      };
+
+    case OBTAIN_USER:
+      return {
+        ...state,
+        user: action.payload,
+        authenticated: true,
+        loading: false,
+      };
+
     default:
       return state;
   }

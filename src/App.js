@@ -7,9 +7,16 @@ import ProjectState from "./context/projects/ProjectState";
 import TaskState from "./context/tasks/TaskState";
 import AlertState from "./context/alerts/AlertState";
 import AuthState from "./context/authentication/AuthState";
+import sendTokenByHeader from "./config/tokenAuth";
+import PrivateRoute from "./components/routes/PrivateRoute";
+
+//check if there is a token
+const token = localStorage.getItem("token");
+if (token) {
+  sendTokenByHeader(token);
+}
 
 function App() {
-  console.log(process.env.REACT_APP_BACKEND_URL);
   return (
     <ProjectState>
       <TaskState>
@@ -19,7 +26,7 @@ function App() {
               <Switch>
                 <Route exact path="/" component={Login} />
                 <Route exact path="/new-account" component={NewAccount} />
-                <Route exact path="/projects" component={Projects} />
+                <PrivateRoute exact path="/projects" component={Projects} />
               </Switch>
             </Router>
           </AuthState>
