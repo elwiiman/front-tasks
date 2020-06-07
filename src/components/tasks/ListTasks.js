@@ -2,6 +2,7 @@ import React, { Fragment, useContext } from "react";
 import Task from "./Task";
 import projectContext from "../../context/projects/projectContext";
 import taskContext from "../../context/tasks/taskContext";
+
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const ListTasks = () => {
@@ -38,7 +39,7 @@ const ListTasks = () => {
       <button
         type="button"
         className="btn btn-eliminar"
-        onClick={() => deleteProject(projectSelected.id)}
+        onClick={() => deleteProject(projectSelected._id)}
       >
         Delete Project &times;
       </button>
