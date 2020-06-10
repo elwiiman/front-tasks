@@ -14,7 +14,6 @@ export default (state, action) => {
       localStorage.setItem("token", action.payload.token);
       return { ...state, authenticated: true, message: null, loading: false };
 
-    case LOGOUT:
     case ALERT_LOGIN:
     case ALERT_REGISTER:
       localStorage.removeItem("token");
@@ -24,6 +23,18 @@ export default (state, action) => {
         message: action.payload,
         authenticated: null,
         loading: false,
+        user: null,
+      };
+
+    case LOGOUT:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: null,
+        message: null,
+        authenticated: null,
+        loading: false,
+        user: null,
       };
 
     case OBTAIN_USER:
@@ -32,6 +43,7 @@ export default (state, action) => {
         user: action.payload,
         authenticated: true,
         loading: false,
+        message: null,
       };
 
     default:

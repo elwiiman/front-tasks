@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
 import authContext from "../../context/authentication/authContext";
 
 const Bar = (props) => {
@@ -9,6 +8,7 @@ const Bar = (props) => {
 
   useEffect(() => {
     obtainUserAuthenticated();
+    //eslint-disable-next-line
   }, []);
 
   return (

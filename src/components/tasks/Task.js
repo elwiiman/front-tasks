@@ -7,20 +7,20 @@ const Task = ({ task }) => {
   const { projectFocus } = projectsContext;
 
   const tasksContext = useContext(taskContext);
-  const { deleteTask, obtainTasks, changeStatus, extractTask } = tasksContext;
+  const { deleteTask, obtainTasks, extractTask, updateTask } = tasksContext;
 
   const [projectSelected] = projectFocus;
 
   //Function to execute when user press delete button of a task
   const deleteATask = (id) => {
-    deleteTask(id);
-    obtainTasks(projectSelected.id);
+    deleteTask(id, projectSelected._id);
+    obtainTasks(projectSelected._id);
   };
 
   // function to modify tasks state
   const changeState = (task) => {
-    task.state = !task.state;
-    changeStatus(task);
+    task.status = !task.status;
+    updateTask(task);
   };
 
   //function to selct a task
@@ -32,7 +32,7 @@ const Task = ({ task }) => {
     <li className="tarea sombra">
       <p>{task.name}</p>
       <div className="estado">
-        {task.state ? (
+        {task.status ? (
           <button
             type="button"
             className="completo"
@@ -61,7 +61,7 @@ const Task = ({ task }) => {
         <button
           type="button"
           className="btn btn-secundario"
-          onClick={() => deleteATask(task.id)}
+          onClick={() => deleteATask(task._id)}
         >
           Delete
         </button>

@@ -68,7 +68,7 @@ const ProjectState = (props) => {
   //Function to delete a project
   const deleteProject = async (projectId) => {
     try {
-      const result = await axiosClient.delete(`/api/projects/${projectId}`);
+      await axiosClient.delete(`/api/projects/${projectId}`);
       dispatch({ type: DELETE_PROJECT, payload: projectId });
     } catch (error) {
       const alert = { msg: "There was an error", category: "alerta-error" };

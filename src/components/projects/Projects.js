@@ -5,13 +5,15 @@ import FormTask from "../tasks/FormTask";
 import ListTasks from "../tasks/ListTasks";
 import authContext from "../../context/authentication/authContext";
 
-const Projects = () => {
+const Projects = (props) => {
   //Extract authenticacion info from context
   const authsContext = useContext(authContext);
   const { obtainUserAuthenticated } = authsContext;
 
   useEffect(() => {
     obtainUserAuthenticated();
+
+    //eslint-disable-next-line
   }, []);
 
   return (

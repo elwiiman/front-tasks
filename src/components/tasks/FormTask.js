@@ -56,15 +56,15 @@ const FormTask = () => {
     //Review if is editing or adding
     if (taskSelected === null) {
       //add new task to tasks state
-      task.projectId = projectSelected.id;
-      task.state = false;
+      task.project = projectSelected._id;
+
       addTask(task);
     } else {
       updateTask(task);
     }
 
     //obtain tasks in the selected project
-    obtainTasks(projectSelected.id);
+    obtainTasks(projectSelected._id);
 
     //reset form
     setTask({ name: "" });

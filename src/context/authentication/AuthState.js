@@ -37,6 +37,7 @@ const AuthState = (props) => {
         msg: error.response.data.msg,
         category: "alerta-error",
       };
+
       dispatch({ type: ALERT_REGISTER, payload: alert });
     }
   };
@@ -44,16 +45,20 @@ const AuthState = (props) => {
   // Obtain user atuthenticated
   const obtainUserAuthenticated = async () => {
     const token = localStorage.getItem("token");
+
     if (token) {
       // send token by headers
       sendTokenByHeader(token);
-      try {
-        const response = await axiosClient.get("/api/auth");
-        dispatch({ type: OBTAIN_USER, payload: response.data.user });
-      } catch (error) {
-        console.log(error.response);
-        dispatch({ type: ALERT_LOGIN });
-      }
+    }
+    try {
+      const response = await axiosClient.get("/api/auth");
+      dispatch({ type: OBTAIN_USER, payload: response.data.user });
+    } catch (error) {
+      const alert = {
+        msg: error.response.data.msg,
+        category: "alerta-error",
+      };
+      dispatch({ type: ALERT_LOGIN, payload: alert });
     }
   };
 
@@ -61,7 +66,6 @@ const AuthState = (props) => {
   const logIn = async (data) => {
     try {
       const response = await axiosClient.post("/api/auth", data);
-      console.log(response.data);
       dispatch({ type: SUCCES_LOGIN, payload: response.data });
 
       obtainUserAuthenticated();
